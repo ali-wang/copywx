@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 数据表格</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="__public__/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="__public__/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="__public__/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+     <link href="__public__/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="__public__/css/animate.css" rel="stylesheet">
+    <link href="__public__/css/style.css?v=4.1.0" rel="stylesheet">
+    <!-- <link href="__public__/css/H-ui.min.css" rel="stylesheet"> -->
+
+    <script src="__public__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__public__/time/WdatePicker.js"></script>
+
+   
+    <style type="text/css">
+        .wcent{ margin:0 auto; }
+    </style>
+
+     
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本 <small>分类，查找</small></h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="table_data_tables.html#">选项1</a>
+                                </li>
+                                <li><a href="table_data_tables.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                       
+                          <!--  <h2>微信号统计再给点时间给点数据<kbd>,</kbd></h2>
+                           <h3>更多牛逼操作再等几天哈</h3> -->
+                           
+
+                        <form name="searchform" action="select_table_data_tables5" method="post">
+                             <div class="text-c" style="width: 916px; margin:20px auto;">
+                            <span class="select-box inline">
+                            
+                               
+                           
+
+                            </span> 日期范围：
+                           {if ($wl_flag == 0)} 
+                            <input type="text" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm', minDate: '2008-03-08 11:30:00', maxDate: '2019-03-10 20:59:30'} )" value="" id="datemin" class="input-text Wdate" style="width:150px;font-size: 14px;height: 31px;line-height: 1.42857; padding: 4px;" name="star">
+                           至
+
+                            <input type="text" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm', minDate: '2008-03-08 11:30:00', maxDate: '2019-03-10 20:59:30' })"  value="" id="datemax" class="input-text Wdate" style="width:150px;font-size: 14px;height: 31px;line-height: 1.42857; padding: 4px;" name="end">
+
+                          <!--   搜索词：<input type="text" class="input-text" style="width:250px" placeholder="" id="keyword" name="keyword" value="" ondblclick="this.value='';">
+ -->
+                             {elseif $wl_flag == 1/}
+
+                              <input type="text" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm', minDate: '2008-03-08 11:30:00', maxDate: '2019-03-10 20:59:30'} )" value="{$datatime.star}" id="datemin" class="input-text Wdate" style="width:150px;font-size: 14px;height: 31px;line-height: 1.42857; padding: 4px;" name="star">
+                           至
+
+                            <input type="text" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm', minDate: '2008-03-08 11:30:00', maxDate: '2019-03-10 20:59:30' })"  value="{$datatime.end}" id="datemax" class="input-text Wdate" style="width:150px;font-size: 14px;height: 31px;line-height: 1.42857; padding: 4px;" name="end">
+
+                             {/if}
+
+                          <!--   搜索词：<input type="text" class="input-text" style="width:250px" placeholder="" id="keyword" name="keyword" value="" ondblclick="this.value='';">
+ -->              
+                            <button type="submit" style="margin-left:50px;" class="btn btn-success" name="" ><i class="fa fa-vimeo"></i> 搜记录</button>
+
+                            </div>
+                        </form>
+
+                        
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>关键词</th>
+                                    <th>复制次数</th> 
+                                    <th>浏览次数</th>
+                                     <th>转化率</th>
+                                </tr>
+                            </thead>
+                              
+                            <tbody>  
+                        
+                           {if ($wl_flag == 0)} 
+
+                                {foreach name="wx" item="vo" key="k" }
+                                     <tr class="gradeA">                           
+                                        <td class="center">{$k}</td>
+                                        <td class="center">{$vo}</td>
+                                        <td class="center">
+
+                                         {foreach name="wxkeys" item="vos" key=$k }
+                                                    {$vos}
+                                         {/foreach}
+
+                                         </td>
+                                          <td class="center">{$vo/$vos}</td>
+                                     </tr>
+                                {/foreach}
+
+                          {elseif $wl_flag == 1/}  
+                                
+                                {foreach name="wx" item="vo" key="k" }
+                                     <tr class="gradeA">                           
+                                        <td class="center">{$k}</td>
+                                        <td class="center">{$vo}</td> 
+                                         <td class="center">
+
+                                        {foreach name="wxkeys" item="vos" key=$k }
+                                                    {$vos}
+                                         {/foreach} 
+                                         </td>   
+                                          <td class="center">{$vo/$vos}</td>                                  
+                                     </tr>
+                                {/foreach}
+                        {/if}
+                            </tbody>
+                          
+                        </table>
+
+                       
+
+                            
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+       
+    </div>
+
+    <!-- 全局js -->
+    <script src="__public__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__public__/js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <script src="__public__/js/plugins/jeditable/jquery.jeditable.js"></script>
+
+    <!-- Data Tables -->
+    <script src="__public__/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="__public__/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+    <!-- 自定义js -->
+    <script src="__public__/js/content.js?v=1.0.0"></script>
+    <script src="__public__/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Page-Level Scripts -->
+
+
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }
+    </script>
+
+   
+    <script> 
+        //用户删除信息
+     function ajax(obj,id){
+
+                    swal({
+                        title: "您确定要删除这条信息吗",
+                        text: "删除后将无法恢复，请谨慎操作！",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "删除",
+                        closeOnConfirm: false
+                    }, function () {
+                         $.ajax({
+                               type: "post",
+                               url: "user_del",
+                               data: {'id':id},
+                               dataType: "json",
+                               success: function(msg){
+                                    if(msg =='1'){                                     
+                                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                                        $(obj).parents("tr").remove();
+                                    }else{
+                                        swal("删除失败！", "未删除这条信息。", "error");
+                                    }
+                                  
+                                }
+                            }); 
+                    });
+              
+
+       
+        }   
+
+        function isRepeat(arr){
+                var hash = {};
+            for(var i in arr) {
+                if(hash[arr[i]])
+                return true;
+                 hash[arr[i]] = true;
+            }
+            return false;
+            }
+       
+        function yumings(){
+            //域名提交，除去空格、回车。将中文逗号转换成英文逗号
+            var text1 = $("#yuming").val().replace(/[\r\n]/g,"").replace(/\ +/g,"").replace(/，/ig,',');
+            var text2  =text1.replace(",,",",");
+            //var text3  =text2.replace(",,",",");
+            var str  =text2.replace(",,",",");
+            var text = (str.substring(str.length - 1) == ',') ? str.substring(0, str.length - 1) : str;
+           // alert(text);
+            // var text  =douhao(text1);
+            var ary = text.split(',');
+            var flge = isRepeat(ary);
+
+            if(!flge){
+                $.ajax({
+                    type:"post",
+                    url:"yuming",
+                    data:{'yuming':text},
+                    dataType:"json",
+                    success:function(msg){
+                        if(msg==1){
+                            alert("绑定成功！");
+                        }
+                    }
+                })
+            }else{
+                alert('域名存在相同项，请注意检查');
+            }   
+           
+        }  
+
+    </script>
+
+</body>
+
+</html>
